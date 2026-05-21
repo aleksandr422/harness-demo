@@ -1,0 +1,13 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Test / tooling cache
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Runtime data файл приложения
+tasks.json
