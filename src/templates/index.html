@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-Do</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px; }
+    h1 { font-size: 1.4rem; }
+    ul.tasks { list-style: none; padding: 0; }
+    ul.tasks li { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+    .done { text-decoration: line-through; color: #888; }
+    .task-text { flex: 1; }
+    .errors { color: #c00; margin: 12px 0; }
+    form.inline { display: inline; margin: 0; }
+  </style>
+</head>
+<body>
+  <h1>Список задач</h1>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="errors">
+        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" action="{{ url_for('todo.add') }}">
+    <input type="text" name="text" placeholder="Новая задача" autofocus>
+    <button type="submit">Добавить</button>
+  </form>
+
+  {% if tasks %}
+    <ul class="tasks">
+      {% for task in tasks %}
+        <li>
+          <form class="inline" method="post"
+                action="{{ url_for('todo.toggle', task_id=task.id) }}">
+            <input type="checkbox" onchange="this.form.submit()"
+                   {% if task.done %}checked{% endif %}>
+          </form>
+          <span class="task-text {% if task.done %}done{% endif %}">{{ task.text }}</span>
+          <form class="inline" method="post"
+                action="{{ url_for('todo.delete', task_id=task.id) }}">
+            <button type="submit">Удалить</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Задач пока нет.</p>
+  {% endif %}
+</body>
+</html>
