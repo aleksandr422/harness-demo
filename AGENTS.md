@@ -20,3 +20,10 @@
 
 ## Продукт
 Простое To-Do приложение на Python + Flask. Детали: docs/specs/product.md
+
+## Запуск
+- Установка зависимостей: `pip install -r requirements.txt`
+- Запуск приложения: `TODO_SECRET_KEY=<secret> python src/app.py`
+  (открывается на http://127.0.0.1:5000)
+- Тесты: `pytest`
+- Линтер: `bash scripts/lint.sh`
