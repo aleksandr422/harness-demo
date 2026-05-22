@@ -1,7 +1,5 @@
 """HTTP-маршруты To-Do приложения (Flask Blueprint)."""
 
-import logging
-
 from flask import (
     Blueprint,
     flash,
@@ -12,8 +10,6 @@ from flask import (
 )
 
 import service
-
-logger = logging.getLogger(__name__)
 
 bp = Blueprint("todo", __name__)
 
